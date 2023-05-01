@@ -52,7 +52,7 @@ const Introduction = () => {
         <Link onClick={() => window.open("https://www.mysql.com/", "_blank")}>
           MySQL
         </Link>{" "}
-        (and the occassional{" "}
+        (and the occasional{" "}
         <Link onClick={() => window.open("https://www.zsh.org/", "_blank")}>
           Zsh
         </Link>{" "}
