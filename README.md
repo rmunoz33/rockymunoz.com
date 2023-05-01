@@ -1,2 +1,3 @@
-# rockymunoz.com
-My personal/professional website.
+# RockyMunoz.com
+
+A simple, lightweight React app to introduce myself.

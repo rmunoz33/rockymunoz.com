@@ -1,0 +1,16 @@
+.App {
+  color: #000002;
+}
+
+.IntroText {
+  font-size: x-large;
+  margin: 5% 10% 40px 10%;
+  text-align: justify;
+}
+
+.Socials {
+  /* margin-right: auto; */
+  margin-left: 10%;
+  margin-bottom: 5%;
+  float: left;
+}
