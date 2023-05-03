@@ -18,7 +18,9 @@ const Introduction = () => {
           style={{ fontSize: "2em", fontWeight: "bolder" }}
           alignItems="center"
         >
-          <Grid item>{isHovered ? "Hello!" : "¡Hola!"}</Grid>
+          <Grid item className="Greeting">
+            {isHovered ? "Hello!" : "¡Hola!"}
+          </Grid>
           <Grid item>😃</Grid>
         </Grid>
       </div>
@@ -65,7 +67,7 @@ const Introduction = () => {
         <img
           src={require("../assets/navi.gif")}
           alt="Navi"
-          style={{ height: "30px" }}
+          style={{ height: "20px" }}
         />
       </p>
       <p>
@@ -75,9 +77,8 @@ const Introduction = () => {
         >
           shoot your shot
         </Link>
-        ! 👈🏼
+        !
       </p>
-      <p>or 👇🏼</p>
     </div>
   );
 };

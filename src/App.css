@@ -3,14 +3,11 @@
 }
 
 .IntroText {
-  font-size: x-large;
-  margin: 5% 10% 40px 10%;
-  text-align: justify;
+  font-size: large;
+  margin-bottom: 40px;
+  color: #faf9f6;
 }
 
-.Socials {
-  /* margin-right: auto; */
-  margin-left: 10%;
-  margin-bottom: 5%;
-  float: left;
+.Greeting {
+  font-family: "Press Start 2P";
 }
