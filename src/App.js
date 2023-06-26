@@ -4,6 +4,7 @@ import Socials from "./components/Socials";
 import { Grid } from "@mui/material";
 import BackgroundFloor from "./components/BackgroundFloor";
 import FlyingTurtle from "./components/FlyingTurtle";
+import ChatBot from "./components/ChatBot";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
             justifyContent="center"
           >
             <Grid item xs={10}>
+              <ChatBot />
               <Introduction />
             </Grid>
           </Grid>

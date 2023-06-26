@@ -77,7 +77,8 @@ const Introduction = () => {
         >
           shoot your shot
         </Link>
-        !
+        ! Or click the chat icon in the bottom right to talk to a chatbot I
+        trained to answer questions about me.
       </p>
     </div>
   );
