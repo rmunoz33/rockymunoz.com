@@ -36,19 +36,8 @@ const Introduction = () => {
           Node.js
         </Link>
         ,{" "}
-        <Link
-          onClick={() =>
-            window.open(
-              "https://dotnet.microsoft.com/en-us/languages/csharp",
-              "_blank"
-            )
-          }
-        >
-          C#
-        </Link>
-        ,{" "}
-        <Link onClick={() => window.open("https://www.mongodb.com/", "_blank")}>
-          MongoDB
+        <Link onClick={() => window.open("https://www.python.org/", "_blank")}>
+          Python
         </Link>
         , and{" "}
         <Link onClick={() => window.open("https://www.mysql.com/", "_blank")}>
