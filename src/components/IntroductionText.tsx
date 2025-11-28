@@ -1,6 +1,5 @@
 import "../App.css";
 import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
 import { useState } from "react";
 
 const Introduction = () => {
@@ -12,17 +11,12 @@ const Introduction = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Grid
-          container
-          spacing={2}
-          style={{ fontSize: "2em", fontWeight: "bolder" }}
-          alignItems="center"
-        >
-          <Grid item className="Greeting">
+        <div style={{ display: "flex", gap: "16px", fontSize: "2em", fontWeight: "bolder", alignItems: "center" }}>
+          <span className="Greeting">
             {isHovered ? "Hello!" : "¡Hola!"}
-          </Grid>
-          <Grid item>😃</Grid>
-        </Grid>
+          </span>
+          <span>😃</span>
+        </div>
       </div>
       <p>
         My name is <b>Rocky</b>. I like to make awesome software tools that

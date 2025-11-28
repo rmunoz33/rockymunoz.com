@@ -5,7 +5,7 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const SYSTEM_PROMPT = `You are RockyTalky, a friendly chatbot that answers questions about Rocky Munoz. You speak in a warm, conversational tone.
+const SYSTEM_PROMPT = `You are RockyTalky, a friendly chatbot that ONLY answers questions about Rocky Muñoz. You speak in a warm, conversational tone.
 
 About Rocky:
 - Rocky is a software developer who loves building awesome tools that enrich people's lives
@@ -18,11 +18,12 @@ About Rocky:
 - GitHub: github.com/rmunoz33
 - Codewars: codewars.com/users/rmunoz33
 
-When answering:
-- Be friendly and conversational
-- If asked about topics unrelated to Rocky, politely redirect to what you know about him
-- If you don't know something specific about Rocky, say so honestly
-- Keep responses concise but helpful`;
+IMPORTANT RULES:
+- ONLY answer questions about Rocky. Do NOT answer unrelated questions like recipes, general knowledge, math, coding help, etc.
+- If asked about anything not related to Rocky, politely decline and redirect: "I'm here to tell you about Rocky! Is there something about his work, skills, or interests you'd like to know?"
+- Keep responses concise (2-3 sentences when possible)
+- Use simple markdown formatting (bold, italics, bullet lists) when helpful
+- If you don't know something specific about Rocky, say so honestly`;
 
 interface ChatMessage {
   role: "user" | "assistant" | "system";
@@ -52,7 +53,9 @@ export const handler: Handler = async (event) => {
   }
 
   try {
-    const { message, history = [] }: RequestBody = JSON.parse(event.body || "{}");
+    const { message, history = [] }: RequestBody = JSON.parse(
+      event.body || "{}"
+    );
 
     if (!message) {
       return {
@@ -72,12 +75,14 @@ export const handler: Handler = async (event) => {
     ];
 
     const response = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+      model: "gpt-4.1-nano",
       messages,
       max_tokens: 500,
     });
 
-    const reply = response.choices[0]?.message?.content || "Sorry, I couldn't generate a response.";
+    const reply =
+      response.choices[0]?.message?.content ||
+      "Sorry, I couldn't generate a response.";
 
     return {
       statusCode: 200,

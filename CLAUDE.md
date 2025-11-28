@@ -21,14 +21,13 @@ This is a Create React App (TypeScript) personal website deployed to Netlify.
 **Tech Stack:**
 - React 18 with TypeScript
 - HashRouter for client-side routing
-- MUI (Material-UI v5) for layout/Grid components
-- Material-UI v4 `makeStyles` for CSS-in-JS styling
+- Plain CSS and inline styles (no UI framework)
 - OpenAI API via Netlify Functions for chatbot
 
 **Key Components:**
-- `App.tsx` - Main layout using MUI Grid, composes all page components
+- `App.tsx` - Main layout with flexbox, composes all page components
 - `ChatBot.tsx` - Custom chat UI that calls `/.netlify/functions/chat`
-- `FlyingTurtle.tsx` - Animated background element using `@material-ui/core` makeStyles
+- `FlyingTurtle.tsx` - Animated background element with CSS keyframes
 - `IntroductionText.tsx` - Main content with hover-toggle greeting (Spanish/English)
 - `Socials.tsx` - Social media links
 - `BackgroundFloor.tsx` - Background visual element

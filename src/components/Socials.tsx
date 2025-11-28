@@ -1,44 +1,39 @@
 import "../App.css";
-import { Grid, Tooltip } from "@mui/material";
 
 const Socials = () => {
+  const iconStyle: React.CSSProperties = {
+    height: "3em",
+    cursor: "pointer",
+  };
+
   return (
-    <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Tooltip title="LinkedIn">
-        <Grid item>
-          <img
-            src={require("../assets/linkedin.png")}
-            alt="LinkedIn"
-            style={{ height: "3em", cursor: "pointer" }}
-            onClick={() =>
-              window.open("https://www.linkedin.com/in/rocky-munoz/", "_blank")
-            }
-          />
-        </Grid>
-      </Tooltip>
-      <Tooltip title="GitHub">
-        <Grid item>
-          <img
-            src={require("../assets/github.png")}
-            alt="Github"
-            style={{ height: "3em", cursor: "pointer" }}
-            onClick={() => window.open("https://github.com/rmunoz33", "_blank")}
-          />
-        </Grid>
-      </Tooltip>
-      <Tooltip title="Codewars">
-        <Grid item>
-          <img
-            src={require("../assets/codewars.png")}
-            alt="Codewars"
-            style={{ height: "3em", cursor: "pointer" }}
-            onClick={() =>
-              window.open("https://www.codewars.com/users/rmunoz33", "_blank")
-            }
-          />
-        </Grid>
-      </Tooltip>
-    </Grid>
+    <div style={{ display: "flex", gap: "16px", justifyContent: "center", alignItems: "center" }}>
+      <img
+        src={require("../assets/linkedin.png")}
+        alt="LinkedIn"
+        title="LinkedIn"
+        style={iconStyle}
+        onClick={() =>
+          window.open("https://www.linkedin.com/in/rocky-munoz/", "_blank")
+        }
+      />
+      <img
+        src={require("../assets/github.png")}
+        alt="Github"
+        title="GitHub"
+        style={iconStyle}
+        onClick={() => window.open("https://github.com/rmunoz33", "_blank")}
+      />
+      <img
+        src={require("../assets/codewars.png")}
+        alt="Codewars"
+        title="Codewars"
+        style={iconStyle}
+        onClick={() =>
+          window.open("https://www.codewars.com/users/rmunoz33", "_blank")
+        }
+      />
+    </div>
   );
 };
 

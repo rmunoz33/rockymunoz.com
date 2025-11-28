@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
 
 interface Message {
   role: "user" | "assistant";
@@ -11,6 +12,7 @@ const ChatBot = () => {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -19,6 +21,12 @@ const ChatBot = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  useEffect(() => {
+    if (isOpen) {
+      inputRef.current?.focus();
+    }
+  }, [isOpen]);
 
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
@@ -91,7 +99,11 @@ const ChatBot = () => {
                   ...(msg.role === "user" ? styles.userMessage : styles.assistantMessage),
                 }}
               >
-                {msg.content}
+                {msg.role === "assistant" ? (
+                  <ReactMarkdown>{msg.content}</ReactMarkdown>
+                ) : (
+                  msg.content
+                )}
               </div>
             ))}
             {isLoading && (
@@ -104,6 +116,7 @@ const ChatBot = () => {
 
           <div style={styles.inputContainer}>
             <input
+              ref={inputRef}
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
