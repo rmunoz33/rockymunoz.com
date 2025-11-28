@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import naviGif from "../assets/navi.gif";
 
 interface Message {
   role: "user" | "assistant";
@@ -8,6 +9,7 @@ interface Message {
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showBubble, setShowBubble] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: "Hey there! I'm here to answer any questions you have about Rocky. What would you like to know?" }
   ]);
@@ -35,6 +37,7 @@ const ChatBot = () => {
 
     const userMessage = input.trim();
     setInput("");
+    inputRef.current?.focus();
     setMessages((prev) => [...prev, { role: "user", content: userMessage }]);
     setIsLoading(true);
 
@@ -65,6 +68,7 @@ const ChatBot = () => {
       ]);
     } finally {
       setIsLoading(false);
+      inputRef.current?.focus();
     }
   };
 
@@ -129,9 +133,16 @@ const ChatBot = () => {
         </div>
       )}
 
+      {/* Speech Bubble */}
+      {showBubble && !isOpen && (
+        <div style={styles.speechBubble} onClick={() => { setShowBubble(false); setIsOpen(true); }}>
+          Hey, listen!
+        </div>
+      )}
+
       {/* Floating Chat Button */}
-      <button onClick={() => setIsOpen(!isOpen)} style={styles.floatingButton}>
-        {isOpen ? "✕" : "💬"}
+      <button onClick={() => { setShowBubble(false); setIsOpen(!isOpen); }} style={styles.floatingButton}>
+        {isOpen ? "✕" : <img src={naviGif} alt="Chat" style={{ height: "50px" }} />}
       </button>
     </>
   );
@@ -142,11 +153,11 @@ const styles: { [key: string]: React.CSSProperties } = {
     position: "fixed",
     bottom: "20px",
     right: "20px",
-    width: "60px",
-    height: "60px",
+    width: "80px",
+    height: "80px",
     borderRadius: "50%",
-    backgroundColor: "#2196F3",
-    color: "white",
+    backgroundColor: "white",
+    color: "#333",
     border: "none",
     cursor: "pointer",
     fontSize: "24px",
@@ -156,12 +167,27 @@ const styles: { [key: string]: React.CSSProperties } = {
     alignItems: "center",
     justifyContent: "center",
   },
+  speechBubble: {
+    position: "fixed",
+    bottom: "85px",
+    right: "100px",
+    backgroundColor: "white",
+    color: "#333",
+    padding: "8px 12px",
+    borderRadius: "12px",
+    boxShadow: "0 2px 8px rgba(0,0,0,0.2)",
+    fontSize: "14px",
+    fontWeight: "bold",
+    zIndex: 1000,
+    cursor: "pointer",
+    whiteSpace: "nowrap",
+  },
   chatWindow: {
     position: "fixed",
-    bottom: "90px",
+    bottom: "110px",
     right: "20px",
-    width: "350px",
-    height: "450px",
+    width: "min(350px, calc(100vw - 40px))",
+    height: "min(550px, calc(100vh - 150px))",
     backgroundColor: "white",
     borderRadius: "12px",
     boxShadow: "0 4px 20px rgba(0,0,0,0.2)",
