@@ -1,7 +1,11 @@
 [build]
-  command = "yarn install && yarn run build"
-  publish="/build"
+  command = "npm run build"
+  publish = "/build"
   base = "/"
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
 
 [[redirects]]
   from = "/*"
