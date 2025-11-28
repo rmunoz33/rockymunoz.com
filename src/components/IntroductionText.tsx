@@ -28,23 +28,23 @@ const Introduction = () => {
         My name is <b>Rocky</b>. I like to make awesome software tools that
         enrich people's lives, whether in their work, play, or day-to-day
         experience. My weapons of choice are{" "}
-        <Link onClick={() => window.open("https://react.dev/", "_blank")}>
+        <Link onClick={() => window.open("https://react.dev/", "_blank")} to="#">
           React
         </Link>
         ,{" "}
-        <Link onClick={() => window.open("https://nodejs.org/en", "_blank")}>
+        <Link onClick={() => window.open("https://nodejs.org/en", "_blank")} to="#">
           Node.js
         </Link>
         ,{" "}
-        <Link onClick={() => window.open("https://www.python.org/", "_blank")}>
+        <Link onClick={() => window.open("https://www.python.org/", "_blank")} to="#">
           Python
         </Link>
         , and{" "}
-        <Link onClick={() => window.open("https://www.mysql.com/", "_blank")}>
+        <Link onClick={() => window.open("https://www.mysql.com/", "_blank")} to="#">
           MySQL
         </Link>{" "}
         (and the occasional{" "}
-        <Link onClick={() => window.open("https://www.zsh.org/", "_blank")}>
+        <Link onClick={() => window.open("https://www.zsh.org/", "_blank")} to="#">
           Zsh
         </Link>{" "}
         script).
@@ -62,7 +62,8 @@ const Introduction = () => {
       <p>
         If you're interested in working with me, feel free to{" "}
         <Link
-          onClick={() => (window.location = "mailto:almostheresy@gmail.com")}
+          onClick={() => (window.location.href = "mailto:almostheresy@gmail.com")}
+          to="#"
         >
           shoot your shot
         </Link>

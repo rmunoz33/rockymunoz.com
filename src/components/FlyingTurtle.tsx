@@ -1,7 +1,7 @@
 import turtle from "../assets/flying_koopa_troopa.gif";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   container: {
     width: "100%",
     overflow: "hidden",
