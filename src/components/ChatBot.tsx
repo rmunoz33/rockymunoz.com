@@ -8,7 +8,9 @@ interface Message {
 
 const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    { role: "assistant", content: "Hey there! I'm here to answer any questions you have about Rocky. What would you like to know?" }
+  ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -79,18 +81,13 @@ const ChatBot = () => {
       {isOpen && (
         <div style={styles.chatWindow}>
           <div style={styles.header}>
-            <span style={styles.headerTitle}>RockyTalky</span>
+            <span style={styles.headerTitle}>Chat with me</span>
             <button onClick={() => setIsOpen(false)} style={styles.closeButton}>
               ✕
             </button>
           </div>
 
           <div style={styles.messagesContainer}>
-            {messages.length === 0 && (
-              <div style={styles.welcomeMessage}>
-                Hi! I'm RockyTalky. Ask me anything about Rocky!
-              </div>
-            )}
             {messages.map((msg, idx) => (
               <div
                 key={idx}
@@ -199,12 +196,6 @@ const styles: { [key: string]: React.CSSProperties } = {
     display: "flex",
     flexDirection: "column",
     gap: "10px",
-  },
-  welcomeMessage: {
-    textAlign: "center",
-    color: "#666",
-    padding: "20px",
-    fontSize: "14px",
   },
   message: {
     padding: "10px 14px",
