@@ -11,7 +11,11 @@ const ChatBot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showBubble, setShowBubble] = useState(true);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "assistant", content: "Hey there! I'm here to answer any questions you have about Rocky. What would you like to know?" }
+    {
+      role: "assistant",
+      content:
+        "Hey there! I'm here to answer any questions you have about Rocky. What would you like to know?",
+    },
   ]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -54,17 +58,26 @@ const ChatBot = () => {
       const data = await response.json();
 
       if (response.ok) {
-        setMessages((prev) => [...prev, { role: "assistant", content: data.reply }]);
+        setMessages((prev) => [
+          ...prev,
+          { role: "assistant", content: data.reply },
+        ]);
       } else {
         setMessages((prev) => [
           ...prev,
-          { role: "assistant", content: "Sorry, something went wrong. Please try again." },
+          {
+            role: "assistant",
+            content: "Sorry, something went wrong. Please try again.",
+          },
         ]);
       }
     } catch (error) {
       setMessages((prev) => [
         ...prev,
-        { role: "assistant", content: "Sorry, I couldn't connect. Please try again." },
+        {
+          role: "assistant",
+          content: "Sorry, I couldn't connect. Please try again.",
+        },
       ]);
     } finally {
       setIsLoading(false);
@@ -97,7 +110,9 @@ const ChatBot = () => {
                 key={idx}
                 style={{
                   ...styles.message,
-                  ...(msg.role === "user" ? styles.userMessage : styles.assistantMessage),
+                  ...(msg.role === "user"
+                    ? styles.userMessage
+                    : styles.assistantMessage),
                 }}
               >
                 {msg.role === "assistant" ? (
@@ -126,7 +141,11 @@ const ChatBot = () => {
               style={styles.input}
               disabled={isLoading}
             />
-            <button onClick={sendMessage} style={styles.sendButton} disabled={isLoading}>
+            <button
+              onClick={sendMessage}
+              style={styles.sendButton}
+              disabled={isLoading}
+            >
               Send
             </button>
           </div>
@@ -135,14 +154,30 @@ const ChatBot = () => {
 
       {/* Speech Bubble */}
       {showBubble && !isOpen && (
-        <div style={styles.speechBubble} onClick={() => { setShowBubble(false); setIsOpen(true); }}>
+        <div
+          style={styles.speechBubble}
+          onClick={() => {
+            setShowBubble(false);
+            setIsOpen(true);
+          }}
+        >
           Hey, listen!
         </div>
       )}
 
       {/* Floating Chat Button */}
-      <button onClick={() => { setShowBubble(false); setIsOpen(!isOpen); }} style={styles.floatingButton}>
-        {isOpen ? "✕" : <img src={naviGif} alt="Chat" style={{ height: "50px" }} />}
+      <button
+        onClick={() => {
+          setShowBubble(false);
+          setIsOpen(!isOpen);
+        }}
+        style={styles.floatingButton}
+      >
+        {isOpen ? (
+          "✕"
+        ) : (
+          <img src={naviGif} alt="Chat" style={{ height: "50px" }} />
+        )}
       </button>
     </>
   );
@@ -259,7 +294,7 @@ const styles: { [key: string]: React.CSSProperties } = {
     borderRadius: "20px",
     border: "1px solid #ddd",
     outline: "none",
-    fontSize: "14px",
+    fontSize: "16px",
   },
   sendButton: {
     padding: "10px 20px",
