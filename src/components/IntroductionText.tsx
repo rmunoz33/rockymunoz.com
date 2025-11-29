@@ -47,6 +47,13 @@ const Introduction = () => {
         >
           Python
         </Link>
+        ,{" "}
+        <Link
+          onClick={() => window.open("https://www.langchain.com/", "_blank")}
+          to="#"
+        >
+          LangChain
+        </Link>
         , and{" "}
         <Link
           onClick={() => window.open("https://www.mysql.com/", "_blank")}
