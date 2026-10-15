@@ -1,9 +1,7 @@
 import { Handler } from "@netlify/functions";
-import OpenAI from "openai";
+import Anthropic from "@anthropic-ai/sdk";
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const client = new Anthropic();
 
 const SYSTEM_PROMPT = `You are a friendly chatbot that ONLY answers questions about Rocky Muñoz. You speak in a warm, conversational tone.
 
@@ -65,14 +63,9 @@ IMPORTANT RULES:
 - Use simple markdown formatting (bold, italics, bullet lists) when helpful
 - If you don't know something specific about Rocky, say so honestly`;
 
-interface ChatMessage {
-  role: "user" | "assistant" | "system";
-  content: string;
-}
-
 interface RequestBody {
   message: string;
-  history?: ChatMessage[];
+  history?: Anthropic.MessageParam[];
 }
 
 export const handler: Handler = async (event) => {
@@ -85,10 +78,10 @@ export const handler: Handler = async (event) => {
   }
 
   // Check for API key
-  if (!process.env.OPENAI_API_KEY) {
+  if (!process.env.ANTHROPIC_API_KEY) {
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: "OpenAI API key not configured" }),
+      body: JSON.stringify({ error: "Anthropic API key not configured" }),
     };
   }
 
@@ -104,25 +97,30 @@ export const handler: Handler = async (event) => {
       };
     }
 
-    // Build messages array with system prompt and history
-    const messages: OpenAI.Chat.ChatCompletionMessageParam[] = [
-      { role: "system", content: SYSTEM_PROMPT },
-      ...history.map((msg) => ({
-        role: msg.role as "user" | "assistant",
-        content: msg.content,
-      })),
+    // Claude requires the first message to be from the user, so drop the
+    // client-side greeting and any other leading assistant messages
+    const firstUserIndex = history.findIndex((msg) => msg.role === "user");
+    const messages: Anthropic.MessageParam[] = [
+      ...(firstUserIndex === -1 ? [] : history.slice(firstUserIndex)).map(
+        (msg) => ({ role: msg.role, content: msg.content })
+      ),
       { role: "user", content: message },
     ];
 
-    const response = await client.chat.completions.create({
-      model: "gpt-4.1-nano",
+    const response = await client.messages.create({
+      model: "claude-haiku-4-5",
+      max_tokens: 1024,
+      system: SYSTEM_PROMPT,
       messages,
-      max_tokens: 500,
     });
 
     const reply =
-      response.choices[0]?.message?.content ||
-      "Sorry, I couldn't generate a response.";
+      response.stop_reason === "refusal"
+        ? "Sorry, I can't help with that. Is there something about Rocky you'd like to know?"
+        : response.content
+            .filter((block) => block.type === "text")
+            .map((block) => block.text)
+            .join("") || "Sorry, I couldn't generate a response.";
 
     return {
       statusCode: 200,
@@ -132,7 +130,7 @@ export const handler: Handler = async (event) => {
       body: JSON.stringify({ reply }),
     };
   } catch (error) {
-    console.error("Error calling OpenAI:", error);
+    console.error("Error calling Anthropic:", error);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: "Failed to get response from AI" }),

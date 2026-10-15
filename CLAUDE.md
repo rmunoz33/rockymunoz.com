@@ -22,7 +22,7 @@ This is a Create React App (TypeScript) personal website deployed to Netlify.
 - React 18 with TypeScript
 - HashRouter for client-side routing
 - Plain CSS and inline styles (no UI framework)
-- OpenAI API via Netlify Functions for chatbot
+- Claude API (Anthropic SDK) via Netlify Functions for chatbot
 
 **Key Components:**
 - `App.tsx` - Main layout with flexbox, composes all page components
@@ -33,10 +33,10 @@ This is a Create React App (TypeScript) personal website deployed to Netlify.
 - `BackgroundFloor.tsx` - Background visual element
 
 **Netlify Function:**
-- `netlify/functions/chat.ts` - OpenAI-powered chatbot API endpoint
+- `netlify/functions/chat.ts` - Claude-powered chatbot API endpoint
 
 **Deployment:**
 - Netlify handles builds via `netlify.toml`
 - Uses `npm install && npm run build` for production
-- Requires `OPENAI_API_KEY` environment variable in Netlify dashboard
+- Requires `ANTHROPIC_API_KEY` environment variable in Netlify dashboard
 - SPA routing configured with catch-all redirect to `/index.html`
