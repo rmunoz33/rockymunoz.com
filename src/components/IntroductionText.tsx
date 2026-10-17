@@ -28,17 +28,10 @@ const Introduction = () => {
         enrich people's lives, whether in their work, play, or day-to-day
         experience. My weapons of choice are{" "}
         <Link
-          onClick={() => window.open("https://react.dev/", "_blank")}
+          onClick={() => window.open("https://www.typescriptlang.org/", "_blank")}
           to="#"
         >
-          React
-        </Link>
-        ,{" "}
-        <Link
-          onClick={() => window.open("https://nodejs.org/en", "_blank")}
-          to="#"
-        >
-          Node.js
+          TypeScript
         </Link>
         ,{" "}
         <Link
@@ -49,17 +42,17 @@ const Introduction = () => {
         </Link>
         ,{" "}
         <Link
-          onClick={() => window.open("https://www.langchain.com/", "_blank")}
+          onClick={() => window.open("https://www.langchain.com/langgraph", "_blank")}
           to="#"
         >
-          LangChain
+          LangGraph
         </Link>
         , and{" "}
         <Link
-          onClick={() => window.open("https://www.mysql.com/", "_blank")}
+          onClick={() => window.open("https://www.postgresql.org/", "_blank")}
           to="#"
         >
-          MySQL
+          PostgreSQL
         </Link>{" "}
         (and the occasional{" "}
         <Link
